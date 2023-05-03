@@ -8,6 +8,7 @@ import {
     DrawerContentScrollView,
     DrawerItemList
 } from '@react-navigation/drawer';
+import ReservationScreen from './ReservationScreen';
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import ContactScreen from './ContactScreen';
@@ -19,6 +20,7 @@ import { fetchPartners } from '../features/partners/parnersSlice';
 import { fetchCampsites } from '../features/campsites/campsitesSlice';
 import { fetchPromotions } from '../features/promotions/promotionsSlice';
 import { fetchComments } from '../features/comments/commentsSlice';
+// import ReservationScreen from './ReservationScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -107,6 +109,30 @@ const ContactNavigator = () => {
     );
 };
 
+const ReservationNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='Reservation'
+                component={ReservationScreen}
+                options={({ navigation }) => ({
+                    title: 'Reservation Search',
+                    headerLeft: () => (
+                        <Icon
+                            name='tree'
+                            type='font-awesome'
+                            iconStyle={styles.stackIcon}
+                            onPress={() => navigation.toggleDrawer()}
+                        />
+                    )
+                })}
+            />
+        </Stack.Navigator>
+    );
+};
+
+
 const AboutNavigator = () => {
     const Stack = createStackNavigator();
     return (
@@ -130,18 +156,18 @@ const AboutNavigator = () => {
 };
 
 const CustomDrawerContent = (props) => (
-        <DrawerContentScrollView {...props}>
-            <View style={styles.drawerHeader}>
-                <View style={{ flex: 1 }}>
-                    <Image source={logo} style={styles.drawerImage} />
-                </View>
-                <View style={{ flex: 2 }}>
-                    <Text style={styles.drawerHeaderText}>Nucamp</Text>
-                </View>
+    <DrawerContentScrollView {...props}>
+        <View style={styles.drawerHeader}>
+            <View style={{ flex: 1 }}>
+                <Image source={logo} style={styles.drawerImage} />
             </View>
-            <DrawerItemList {...props} labelStyle={{ fontWeight: 'bold' }} />
-        </DrawerContentScrollView>
-    )
+            <View style={{ flex: 2 }}>
+                <Text style={styles.drawerHeaderText}>Nucamp</Text>
+            </View>
+        </View>
+        <DrawerItemList {...props} labelStyle={{ fontWeight: 'bold' }} />
+    </DrawerContentScrollView>
+)
 
 
 const Main = () => {
@@ -191,6 +217,22 @@ const Main = () => {
                         drawerIcon: ({ color }) => (
                             <Icon
                                 name='list'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ width: 24 }}
+                                color={color}
+                            />
+                        )
+                    }}
+                />
+                <Drawer.Screen
+                    name='Reserve Campsite'
+                    component={ReservationNavigator}
+                    options={{
+                        title: 'Reserve Campsite',
+                        drawerIcon: ({ color }) => (
+                            <Icon
+                                name='tree'
                                 type='font-awesome'
                                 size={24}
                                 iconStyle={{ width: 24 }}
