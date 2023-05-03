@@ -1,10 +1,12 @@
 import { Text, View } from "react-native-animatable"
-import { Card } from "react-native-elements"
+import { Card, Icon } from "react-native-elements"
+import { StyleSheet } from "react-native";
 
-const RenderCampsite = ({ campsite }) => {
+const RenderCampsite = (props) => {
+    const { campsite } = props;
     if (campsite) {
         return (
-            <Card containerStyle={{ padding: 0 }}>
+            <Card containerStyle={styles.cardContainer}>
                 <Card.Image source={campsite.image}>
                     <View style={{ justifyContent: 'center', flex: 1 }}>
                         <Text
@@ -18,6 +20,14 @@ const RenderCampsite = ({ campsite }) => {
                         </Text>
                     </View>
                 </Card.Image>
+                <Icon
+                    name={props.isFavorite ? 'heart' : 'heart-o'}
+                    type='font-awesome'
+                    color= '#f50'
+                    raised
+                    reverse
+                    onPress={() =>  props.markFavorite()}
+                />
                 <Text style={{ margin: 20 }}>
                     {campsite.description}
                 </Text>
@@ -26,5 +36,13 @@ const RenderCampsite = ({ campsite }) => {
     }
     return <View />
 };
+
+const styles = StyleSheet.create({
+    cardContainer: {
+        padding: 0,
+        margin: 0,
+        marginBottom: 20
+    }
+});
 
 export default RenderCampsite;

@@ -8,6 +8,7 @@ const CampsiteInfoScreen = ({ route }) => {
     const { campsite } = route.params;
 
     const [comments, setComments] = useState(COMMENTS);
+    const [favorite, setFavorite] = useState(false);
 
     const renderCommentItem = ({ item }) => {
         return (
@@ -31,29 +32,33 @@ const CampsiteInfoScreen = ({ route }) => {
             contentContainerStyle={{ marginHorizontal: 20, paddingVertical: 20 }}
             ListHeaderComponent={
                 <>
-                    <RenderCampsite campsite={campsite} />
-                    <Text style={styles.commentsTitle}>Comments</Text>
-                </>
+                    <RenderCampsite
+                        campsite={campsite}
+                        isFavorite={favorite}
+                        markFavorite={() => setFavorite(!favorite)}
+                    />
+                        <Text style={styles.commentsTitle}>Comments</Text>
+                    </>
             }
         />
-    );
+                    );
 };
 
-const styles = StyleSheet.create({
-    commentsTitle: {
-        textAlign: 'center',
-        backgroundColor: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: '#43484D',
-        padding: 10,
-        paddingTop: 30
+                    const styles = StyleSheet.create({
+                        commentsTitle: {
+                        textAlign: 'center',
+                    backgroundColor: '#fff',
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    color: '#43484D',
+                    padding: 10,
+                    paddingTop: 30
     },
-    commentItem: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        backgroundColor: '#fff'
+                    commentItem: {
+                        paddingVertical: 10,
+                    paddingHorizontal: 20,
+                    backgroundColor: '#fff'
     }
 });
 
-export default CampsiteInfoScreen;
+                    export default CampsiteInfoScreen;
