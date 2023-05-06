@@ -4,6 +4,8 @@ import { StyleSheet } from "react-native";
 import { baseUrl } from "../../shared/baseUrl";
 
 const RenderCampsite = (props) => {
+    
+
     const { campsite } = props;
     if (campsite) {
         return (
@@ -11,24 +13,32 @@ const RenderCampsite = (props) => {
                 <Card.Image source={{ uri: baseUrl + campsite.image }}>
                     <View style={{ justifyContent: 'center', flex: 1 }}>
                         <Text
-                            style={{
-                                color: 'white',
-                                textAlign: 'center',
-                                fontSize: 20
-                            }}
+                            style={styles.cardText}
                         >
                             {campsite.name}
                         </Text>
                     </View>
                 </Card.Image>
-                <Icon
-                    name={props.isFavorite ? 'heart' : 'heart-o'}
-                    type='font-awesome'
-                    color= '#f50'
-                    raised
-                    reverse
-                    onPress={() =>  props.markFavorite()}
-                />
+                <View 
+                    style={styles.cardRow}
+                >
+                    <Icon
+                        name={props.isFavorite ? 'heart' : 'heart-o'}
+                        type='font-awesome'
+                        color='#f50'
+                        raised
+                        reverse
+                        onPress={() => props.markFavorite()}
+                    />
+                    <Icon
+                        name={'pencil'}
+                        type='font-awesome'
+                        color={'#5637DD'}
+                        raised
+                        reverse
+                        onPress={() => props.onShowModal()}
+                    />
+                </View>
                 <Text style={{ margin: 20 }}>
                     {campsite.description}
                 </Text>
@@ -39,6 +49,21 @@ const RenderCampsite = (props) => {
 };
 
 const styles = StyleSheet.create({
+    cardRow: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        flexDirection: 'row',
+        margin: 20
+    },
+    cardText: {
+        textShadowColor: 'rgba(0,0,0,1)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 20,
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 20
+    },
     cardContainer: {
         padding: 0,
         margin: 0,
