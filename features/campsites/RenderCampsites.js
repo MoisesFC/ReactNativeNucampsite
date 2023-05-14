@@ -8,6 +8,7 @@ const RenderCampsite = (props) => {
     const { campsite } = props;
 
     const isLeftSwipe = ({ dx }) => dx < -200;
+    const isRigthSwipe = ({ dx }) => dx > 200;
 
     const view = useRef();
 
@@ -41,6 +42,9 @@ const RenderCampsite = (props) => {
                     { campsite: false }
                 )
             }
+            if (isRigthSwipe(gestureState)) {
+                props.onShowModal();
+            }
         }
     })
 
@@ -50,7 +54,7 @@ const RenderCampsite = (props) => {
                 animation='fadeInDownBig'
                 duration={2000}
                 delay={1000}
-                ref={ view }
+                ref={view}
                 {...panResponder.panHandlers}
             >
                 <Card containerStyle={styles.cardContainer}>
